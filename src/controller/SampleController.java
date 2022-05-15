@@ -39,7 +39,6 @@ public class SampleController {
 	
 	@FXML
 	public void initialize() {
-		System.out.println(ZoneId.getAvailableZoneIds());
 		timesList.add(ZoneId.of("Asia/Aden"));
 		tick();
 	}

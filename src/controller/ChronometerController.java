@@ -12,7 +12,7 @@ import javafx.scene.control.Label;
 public class ChronometerController {
 
 	private Main main;
-	private boolean continu = false;
+	private boolean continu = true;
 	private LocalTime initialTime;
 	String message = "";
 	int count = 0;
@@ -37,6 +37,7 @@ public class ChronometerController {
 	
 	@FXML
 	public void initialize() {
+		initialTime = LocalTime.now();
 		tick();
 	}
 	
@@ -85,9 +86,9 @@ public class ChronometerController {
 					e.printStackTrace();
 				}
 				Platform.runLater(()->{
-					LocalTime actualTime = LocalTime.now().minusHours(initialTime.getHour());
-					actualTime = actualTime.minusMinutes(initialTime.getMinute());
-					actualTime =actualTime.minusSeconds(initialTime.getSecond());
+					LocalTime actualTime = LocalTime.now().minusHours(Long.parseLong(""+initialTime.getHour()));
+					actualTime = actualTime.minusMinutes(Long.parseLong(""+initialTime.getMinute()));
+					actualTime =actualTime.minusSeconds(Long.parseLong(""+initialTime.getSecond()));
 					time.setText(""+actualTime);
 					times.setText(message);
 				});
