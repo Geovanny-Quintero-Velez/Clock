@@ -14,6 +14,7 @@ public class ChronometerController {
 	private Main main;
 	private boolean continu = true;
 	private LocalTime initialTime;
+	private LocalTime pauseTime;
 	String message = "";
 	int count = 0;
 
@@ -39,6 +40,7 @@ public class ChronometerController {
 	public void initialize() {
 		initialTime = LocalTime.now();
 		tick();
+		
 	}
 	
 	@FXML
@@ -54,8 +56,10 @@ public class ChronometerController {
 	public void runTime() {
 		if(continu == true) {
 			continu = false;
+			pauseTime = calculateActualTime();
 		}else {
 			continu = true;
+			tick();
 			
 		}
 	}
@@ -63,11 +67,12 @@ public class ChronometerController {
 	@FXML
 	public void roundTime() {
 		count++;
-		LocalTime actualTime = LocalTime.now().minusHours(Long.parseLong(""+initialTime.getHour()));
-		actualTime = actualTime.minusMinutes(Long.parseLong(""+initialTime.getMinute()));
-		actualTime =actualTime.minusSeconds(Long.parseLong(""+initialTime.getSecond()));
+		if(continu == true) {
+			message += "#"+count+" "+calculateActualTime()+"\n";
+		}else {
+			message += "#"+count+" "+pauseTime+"\n";
+		}
 		
-		message += "#"+count+" "+actualTime+"\n";
 	}
 	
 	@FXML
@@ -78,7 +83,12 @@ public class ChronometerController {
 	}
 	
 	
-	
+	public LocalTime calculateActualTime() {
+		LocalTime actualTime = LocalTime.now().minusHours(Long.parseLong(""+initialTime.getHour()));
+		actualTime = actualTime.minusMinutes(Long.parseLong(""+initialTime.getMinute()));
+		actualTime =actualTime.minusSeconds(Long.parseLong(""+initialTime.getSecond()));
+		return actualTime;
+	}
 	
 	
 	public void tick() {
@@ -90,10 +100,8 @@ public class ChronometerController {
 					e.printStackTrace();
 				}
 				Platform.runLater(()->{
-					LocalTime actualTime = LocalTime.now().minusHours(Long.parseLong(""+initialTime.getHour()));
-					actualTime = actualTime.minusMinutes(Long.parseLong(""+initialTime.getMinute()));
-					actualTime =actualTime.minusSeconds(Long.parseLong(""+initialTime.getSecond()));
-					time.setText(""+actualTime);
+					
+					time.setText(""+calculateActualTime());
 					times.setText(message);
 				});
 			}
