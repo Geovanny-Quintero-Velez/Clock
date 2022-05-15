@@ -63,7 +63,11 @@ public class ChronometerController {
 	@FXML
 	public void roundTime() {
 		count++;
-		message += "#"+count+" "+LocalTime.now()+"\n";
+		LocalTime actualTime = LocalTime.now().minusHours(Long.parseLong(""+initialTime.getHour()));
+		actualTime = actualTime.minusMinutes(Long.parseLong(""+initialTime.getMinute()));
+		actualTime =actualTime.minusSeconds(Long.parseLong(""+initialTime.getSecond()));
+		
+		message += "#"+count+" "+actualTime+"\n";
 	}
 	
 	@FXML
@@ -79,7 +83,7 @@ public class ChronometerController {
 	
 	public void tick() {
 		new Thread(()-> {
-			if(continu == true) {
+			while(continu == true) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
