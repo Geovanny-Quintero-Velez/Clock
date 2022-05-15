@@ -5,7 +5,10 @@ import java.time.LocalTime;
 import application.Main;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import model.TimeList;
 
@@ -14,6 +17,8 @@ public class SampleController {
 	private Main main;
 	
 	private TimeList timesList = new TimeList();
+	
+
 	@FXML
 	Label time;
 	
@@ -27,6 +32,11 @@ public class SampleController {
 	Button back;
 	
 	@FXML
+	public void selectTime() {
+		
+	}
+	
+	@FXML
 	public void initialize() {
 		tick();
 	}
@@ -38,6 +48,18 @@ public class SampleController {
 	@FXML
 	public void goBack() {
 		main.showChronometer();
+	}
+	
+	public TimeList getTimesList() {
+		return timesList;
+	}
+
+	public void setTimesList(TimeList timesList) {
+		this.timesList = timesList;
+	}
+	
+	public void addTimeZone() {
+		main.showTimeZoneSelector();
 	}
 	
 	public void tick() {
