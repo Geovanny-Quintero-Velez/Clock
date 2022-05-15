@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 
 import application.Main;
 import javafx.application.Platform;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import model.TimeList;
 
 public class SampleController {
@@ -17,7 +19,6 @@ public class SampleController {
 	private Main main;
 	
 	private TimeList timesList = new TimeList();
-	
 
 	@FXML
 	Label time;
@@ -26,7 +27,7 @@ public class SampleController {
 	Label am_pm;
 	
 	@FXML
-	Label times;
+	TextArea times;
 	
 	@FXML
 	Button back;
@@ -38,6 +39,8 @@ public class SampleController {
 	
 	@FXML
 	public void initialize() {
+		System.out.println(ZoneId.getAvailableZoneIds());
+		timesList.add(ZoneId.of("Asia/Aden"));
 		tick();
 	}
 	
@@ -47,6 +50,7 @@ public class SampleController {
 	
 	@FXML
 	public void goBack() {
+		
 		main.showChronometer();
 	}
 	

@@ -51,8 +51,8 @@ public class Main extends Application {
 			BorderPane root;
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("../ui/Sample.fxml"));
 			BorderPane sampleRoot = (BorderPane)loader.load();
-			SampleController sample = loader.getController();
-			sample.setMain(this);
+			sampleController = loader.getController();
+			sampleController.setMain(this);
 			//currentStage.setFullScreen(true);
 			Stage stage = currentStage;
 			root = (BorderPane)stage.getScene().getRoot();

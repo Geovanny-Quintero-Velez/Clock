@@ -1,6 +1,7 @@
 package controller;
 
 import java.time.LocalTime;
+import java.time.ZoneId;
 
 import application.Main;
 import javafx.application.Platform;
@@ -77,7 +78,7 @@ public class ChronometerController {
 	
 	public void tick() {
 		new Thread(()-> {
-			while(continu) {
+			if(continu == true) {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
